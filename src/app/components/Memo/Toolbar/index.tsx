@@ -19,7 +19,9 @@ const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e9e9e9;
+  border: 0 !important;
+  border-bottom: 1px solid #e9e9e9 !important;
+  padding: 0 !important;
 `;
 
 const Menu = styled.div`
@@ -49,7 +51,7 @@ const RightMenu = styled(Menu)`
 
 export default function MemoToolBar() {
   return (
-    <Box>
+    <Box id="toolbar">
       <LeftMenu>
         <TitleText style={{ marginLeft: '5px' }}>MEMO</TitleText>
         <SmallButton Icon={() => <PostDeleteIcon />} />
