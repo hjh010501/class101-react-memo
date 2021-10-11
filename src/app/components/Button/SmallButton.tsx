@@ -1,18 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const Circle = styled.div`
-  width: 36px;
-  min-width: 32px;
-  height: 36px;
-  display: flex;
+const RoundBox = styled.button`
+  width: 36px !important;
+  min-width: 32px !important;
+  height: 36px !important;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  padding: 3px;
+  padding: 3px !important;
   border-radius: 5px;
   cursor: pointer;
+
   &:hover {
-    background-color: rgba(0, 0, 0, 0.07);
+    background: rgba(0, 0, 0, 0.07) !important;
   }
 
   & svg {
@@ -22,16 +23,18 @@ const Circle = styled.div`
 
 export default function SmallButton({
   className,
+  value,
   onClick,
   Icon,
 }: {
   className?: string;
+  value?: string;
   onClick?: () => void;
   Icon: () => JSX.Element;
 }) {
   return (
-    <Circle onClick={onClick} className={className}>
+    <RoundBox onClick={onClick} className={className} value={value}>
       <Icon />
-    </Circle>
+    </RoundBox>
   );
 }

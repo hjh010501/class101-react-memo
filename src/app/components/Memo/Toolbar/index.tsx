@@ -12,6 +12,15 @@ import { ReactComponent as MakeSizeIcon } from './assets/text_fields_black_24dp.
 import { ReactComponent as MakeTodo } from './assets/check_circle_black_24dp.svg';
 import { ReactComponent as MakeImageIcon } from './assets/collections_black_24dp.svg';
 
+import ReactQuill from 'react-quill';
+
+let icons = ReactQuill.Quill.import('ui/icons');
+
+icons['header'] = <MakeSizeIcon />;
+icons['bold'] = <MakeBoldIcon />;
+icons['list'] = <MakeTodo />;
+icons['image'] = <MakeImageIcon />;
+
 const Box = styled.div`
   width: 100%;
   height: 60px;
@@ -59,14 +68,22 @@ export default function MemoToolBar() {
       <RightMenu>
         <SmallButton Icon={() => <PostAddIcon />} />
         <div>
-          <SmallButton Icon={() => <MakeSizeIcon />} />
+          <SmallButton
+            className="ql-header"
+            value="1"
+            Icon={() => <MakeSizeIcon />}
+          />
           <Block marginRight="5px" />
-          <SmallButton Icon={() => <MakeBoldIcon />} />
+          <SmallButton className="ql-bold" Icon={() => <MakeBoldIcon />} />
           <Block marginRight="5px" />
-          <SmallButton Icon={() => <MakeTodo />} />
+          <SmallButton
+            className="ql-list"
+            value="check"
+            Icon={() => <MakeTodo />}
+          />
         </div>
         <div>
-          <SmallButton Icon={() => <MakeImageIcon />} />
+          <SmallButton className="ql-image" Icon={() => <MakeImageIcon />} />
           <Block marginRight="10px" />
           <SearchInput />
         </div>
