@@ -11,13 +11,18 @@ import { SelectedMemoListSelector } from 'store/memo/selectors';
 const Box = styled.div`
   width: 100%;
   height: calc(100vh - 60px);
-  padding: 0 10px;
+  padding: 0 0 0 10px;
+  overflow: auto;
   & * {
     font-family: 'Noto Sans KR' !important;
     letter-spacing: -0.2px;
   }
   & .ql-container.ql-snow {
     border: none !important;
+  }
+
+  & .ql-container > .ql-editor {
+    min-height: 50vh;
   }
 `;
 
@@ -44,7 +49,9 @@ export default function MemoEditor() {
     <Box>
       <Block marginTop="5px" />
       <MemoDate>
-        {new Date(selectedMemo?.created_at ?? '').toLocaleString()}
+        {selectedMemo !== undefined
+          ? new Date(selectedMemo?.created_at ?? '').toLocaleString()
+          : '새 메모를 생성해 보세요'}
       </MemoDate>
       <ReactQuill
         theme="snow"
@@ -66,12 +73,13 @@ export default function MemoEditor() {
             }),
           );
         }}
-        style={{ height: '100%', border: 'none' }}
+        style={{ border: 'none' }}
         modules={{
           toolbar: {
             container: '#toolbar',
           },
         }}
+        readOnly={selectedMemo === undefined}
         formats={['bold', 'size', 'header', 'image', 'list', 'link']}
       />
     </Box>

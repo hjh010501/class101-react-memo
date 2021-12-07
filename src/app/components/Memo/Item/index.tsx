@@ -18,6 +18,12 @@ const MemoTitle = styled.div`
   font-size: 1rem;
   font-weight: 700;
   color: #2c2c2c;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const MemoContent = styled.div`
@@ -45,9 +51,13 @@ export default function MemoItem({
       selected={selected}
       onClick={() => dispatch(MemoActions.selectMemo({ id: id }))}
     >
-      <MemoTitle>{preview}</MemoTitle>
-      <MemoContent>{created_at}</MemoContent>
-      <MemoContent>{preview}</MemoContent>
+      <MemoTitle>
+        {preview.replace(/\n/g, '') !== '' ? preview : '내용을 입력해 주세요'}
+      </MemoTitle>
+      <MemoContent>{new Date(created_at).toLocaleString('ko')}</MemoContent>
+      <MemoContent>
+        {preview.replace(/\n/g, '') !== '' ? preview : '내용을 입력해 주세요'}
+      </MemoContent>
     </Box>
   );
 }
