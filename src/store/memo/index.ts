@@ -5,6 +5,7 @@ import { MemoState } from './types';
 import { saveMemoData, loadMemoData } from '../localStorage';
 
 export const initialState: MemoState = {
+  search: '',
   memolist: loadMemoData(),
 };
 
@@ -73,6 +74,9 @@ const slice = createSlice({
         }
       }
       saveMemoData(state.memolist);
+    },
+    searchMemo(state, action: PayloadAction<{ search: string }>) {
+      state.search = action.payload.search;
     },
   },
 });

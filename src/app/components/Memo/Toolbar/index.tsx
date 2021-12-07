@@ -13,8 +13,9 @@ import { ReactComponent as MakeTodo } from './assets/check_circle_black_24dp.svg
 import { ReactComponent as MakeImageIcon } from './assets/collections_black_24dp.svg';
 
 import ReactQuill from 'react-quill';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMemoSlice } from 'store/memo';
+import { SearchMemoListSelector } from 'store/memo/selectors';
 
 let icons = ReactQuill.Quill.import('ui/icons');
 
@@ -62,6 +63,7 @@ const RightMenu = styled(Menu)`
 
 export default function MemoToolBar() {
   const { MemoActions } = useMemoSlice();
+  const search = useSelector(SearchMemoListSelector);
   const dispatch = useDispatch();
 
   return (
@@ -103,7 +105,12 @@ export default function MemoToolBar() {
         <div>
           <SmallButton className="ql-image" Icon={() => <MakeImageIcon />} />
           <Block marginRight="10px" />
-          <SearchInput />
+          <SearchInput
+            search={search}
+            onChange={value =>
+              dispatch(MemoActions.searchMemo({ search: value }))
+            }
+          />
         </div>
       </RightMenu>
     </Box>
