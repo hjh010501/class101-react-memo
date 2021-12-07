@@ -1,4 +1,7 @@
 import styled from 'styled-components/macro';
+import { useSelector } from 'react-redux';
+import { MemoListSelector } from 'store/memo/selectors';
+
 import MemoItem from '../Item';
 
 const List = styled.div`
@@ -9,11 +12,18 @@ const List = styled.div`
 `;
 
 export default function MemoList() {
+  const memoList = useSelector(MemoListSelector);
   return (
     <List>
-      <MemoItem selected />
-      <MemoItem />
-      <MemoItem />
+      {memoList.map(memo => (
+        <MemoItem
+          id={memo.id}
+          created_at={memo.created_at}
+          selected={memo.selected}
+          content={memo.content}
+          preview={memo.preview}
+        />
+      ))}
     </List>
   );
 }

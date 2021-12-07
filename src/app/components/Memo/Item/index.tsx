@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { useMemoSlice } from 'store/memo';
 import styled from 'styled-components/macro';
 
 const Box = styled.div<{ selected?: boolean }>`
@@ -29,12 +31,23 @@ const MemoContent = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-export default function MemoItem({ selected }: { selected?: boolean }) {
+export default function MemoItem({
+  id,
+  preview,
+  created_at,
+  selected,
+}: MemoItem) {
+  const { MemoActions } = useMemoSlice();
+  const dispatch = useDispatch();
+
   return (
-    <Box selected={selected}>
-      <MemoTitle>안녕하세요</MemoTitle>
-      <MemoContent>어제</MemoContent>
-      <MemoContent>안녕하세요? 잘 지내시나요 :) 어쩌구저쩌구 </MemoContent>
+    <Box
+      selected={selected}
+      onClick={() => dispatch(MemoActions.selectMemo({ id: id }))}
+    >
+      <MemoTitle>{preview}</MemoTitle>
+      <MemoContent>{created_at}</MemoContent>
+      <MemoContent>{preview}</MemoContent>
     </Box>
   );
 }

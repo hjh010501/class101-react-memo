@@ -13,6 +13,8 @@ import { ReactComponent as MakeTodo } from './assets/check_circle_black_24dp.svg
 import { ReactComponent as MakeImageIcon } from './assets/collections_black_24dp.svg';
 
 import ReactQuill from 'react-quill';
+import { useDispatch } from 'react-redux';
+import { useMemoSlice } from 'store/memo';
 
 let icons = ReactQuill.Quill.import('ui/icons');
 
@@ -59,14 +61,30 @@ const RightMenu = styled(Menu)`
 `;
 
 export default function MemoToolBar() {
+  const { MemoActions } = useMemoSlice();
+  const dispatch = useDispatch();
+
   return (
     <Box id="toolbar">
       <LeftMenu>
         <TitleText style={{ marginLeft: '5px' }}>MEMO</TitleText>
-        <SmallButton Icon={() => <PostDeleteIcon />} />
+        <SmallButton
+          onClick={() => dispatch(MemoActions.deleteMemo())}
+          Icon={() => <PostDeleteIcon />}
+        />
       </LeftMenu>
       <RightMenu>
-        <SmallButton Icon={() => <PostAddIcon />} />
+        <SmallButton
+          onClick={() =>
+            dispatch(
+              MemoActions.addMemo(
+                '내용을 입력해 주세요',
+                '내용을 입력해 주세요',
+              ),
+            )
+          }
+          Icon={() => <PostAddIcon />}
+        />
         <div>
           <SmallButton
             className="ql-header"
