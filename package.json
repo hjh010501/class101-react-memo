@@ -64,9 +64,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn run workbox",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "workbox": "workbox generateSW workbox-config.ts",
     "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/generators/test-generators.ts",
     "start:prod": "yarn run build && serve -s build",
     "checkTs": "tsc --noEmit",
@@ -121,5 +122,7 @@
       }
     }
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "workbox-cli": "6.4.1"
+  }
 }

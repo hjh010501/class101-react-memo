@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro';
-import { Helmet } from 'react-helmet-async';
 
 import MemoToolBar from 'app/components/Memo/Toolbar';
 import MemoList from 'app/components/Memo/List';
@@ -14,10 +13,6 @@ const FlexRow = styled.div`
 export function HomePage() {
   return (
     <>
-      <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
-      </Helmet>
       <div>
         <MemoToolBar />
         <FlexRow>
