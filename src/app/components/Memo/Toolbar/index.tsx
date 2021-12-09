@@ -52,6 +52,10 @@ const LeftMenu = styled(Menu)`
   background-color: #fff;
   border-right: 1px solid #e9e9e9;
   padding: 0 10px;
+
+  @media (max-width: 687px) {
+    margin-left: -200px;
+  }
 `;
 
 const RightMenu = styled(Menu)`
